@@ -57,12 +57,6 @@ class TasksViewController: UITableViewController {
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        StorageManager.shared.delete(taskList.self)
-//        tableView.deleteRows(at: [indexPath], with: .automatic)
-//        }
-    
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let task = indexPath.section == 0 ? currentTasks[indexPath.row] : completedTasks[indexPath.row]
@@ -95,8 +89,11 @@ class TasksViewController: UITableViewController {
     @objc private func addButtonPressed() {
         showAlert()
     }
-
 }
+
+
+// MARK: - Extension
+
 extension TasksViewController {
     private func showAlert(with task: Task? = nil, completion: (() -> Void)? = nil) {
         let title = task != nil ? "Edit Task" : "New Task"
@@ -121,8 +118,4 @@ extension TasksViewController {
         let rowIndex = IndexPath(row: currentTasks.index(of: task) ?? 0, section: 0)
         tableView.insertRows(at: [rowIndex], with: .automatic)
     }
-    
-    
-    
-    
 }
