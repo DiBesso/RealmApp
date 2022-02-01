@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/dmitriybessonov/Desktop/1.24/Lesson 2.14/RealmApp/RealmApp/ViewControllers/ExtencionTableViewCell.swift">
+   </FileRef>
+   <FileRef
       location = "group:RealmApp.xcodeproj">
    </FileRef>
    <FileRef

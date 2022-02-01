@@ -75,8 +75,14 @@ class TasksViewController: UITableViewController {
 
         let doneAction = UIContextualAction(style: .normal, title: "Done") { _, _, isDone in
             StorageManager.shared.done(task)
-            tableView.reloadData()
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+            
+            let indexPathForCurrentTask = IndexPath(row: self.currentTasks.index(of: task) ?? 0, section: 0)
+            let indexPathForCompleatedTask = IndexPath(row: self.completedTasks.index(of: task) ?? 0, section: 1)
+            
+            let destinationIndexRow = indexPath.section == 0 ? indexPathForCompleatedTask : indexPathForCurrentTask
+            
+            tableView.moveRow(at: indexPath, to: destinationIndexRow)
+            
             isDone(true)
 
         }
@@ -84,6 +90,10 @@ class TasksViewController: UITableViewController {
         doneAction.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
 
         return UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @objc private func addButtonPressed() {
